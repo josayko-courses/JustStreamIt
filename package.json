@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "init_api": "cd api && pipenv install && pipenv run python manage.py create_db",
+    "api": "cd api/ && pipenv run python manage.py runserver; echo \"local API endpoint: http://localhost:8000/api/v1/titles/\""
   },
   "keywords": [],
   "author": "",
