@@ -1,4 +1,0 @@
-[submodule "api"]
-	path = api
-	url = https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR.git
-    ignore = untracked
