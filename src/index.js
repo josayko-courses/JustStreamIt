@@ -7,31 +7,32 @@ const sliders = document.querySelector('.carousel-box');
 const switchLeft = document.querySelector('.switchLeft');
 const switchRight = document.querySelector('.switchRight');
 
-var scrollPerClick;
-var scrollAmount = 0;
-
 showMovieData();
+switchButtonsListeners();
 
-switchLeft.addEventListener('click', () => {
-  sliders.scrollTo({
-    top: 0,
-    left: (scrollAmount -= scrollPerClick),
-    behavior: 'smooth'
-  });
-  if (scrollAmount < 0) {
-    scrollAmount = 0;
-  }
-});
-
-switchRight.addEventListener('click', () => {
-  if (scrollAmount <= sliders.scrollWidth - sliders.clientWidth) {
+function switchButtonsListeners() {
+  let scrollAmount = 0;
+  let scrollPerClick = 250;
+  switchLeft.addEventListener('click', () => {
     sliders.scrollTo({
       top: 0,
-      left: (scrollAmount += scrollPerClick),
+      left: (scrollAmount -= scrollPerClick),
       behavior: 'smooth'
     });
-  }
-});
+    if (scrollAmount < 0) {
+      scrollAmount = 0;
+    }
+  });
+  switchRight.addEventListener('click', () => {
+    if (scrollAmount <= sliders.scrollWidth - sliders.clientWidth) {
+      sliders.scrollTo({
+        top: 0,
+        left: (scrollAmount += scrollPerClick),
+        behavior: 'smooth'
+      });
+    }
+  });
+}
 
 async function showMovieData() {
   let total = [];
@@ -49,7 +50,6 @@ async function showMovieData() {
       `<img class="img-${index} slider-img" src="${cur.image_url}" />`
     );
   });
-  scrollPerClick = 250;
 }
 
 // Get modal element
