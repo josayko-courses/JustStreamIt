@@ -1,38 +1,57 @@
 const axios = require('axios').default;
 import { openModal, outsideClick, closeModal } from './modal.js';
-import switchButtonsListeners from './carousel.js';
+import { switchButtonsListeners, addDataToCarousel } from './carousel.js';
 
-const baseUrl = 'http://localhost:8000/api/v1/titles?page=1&year=2004';
-const baseUrl2 = 'http://localhost:8000/api/v1/titles?page=2&year=2004';
-const category0 = document.querySelector('#category-0');
+const urls = [
+  'http://localhost:8000/api/v1/titles?imdb_score_min=9',
+  'http://localhost:8000/api/v1/titles?imdb_score_min=8.8&genre=adventure',
+  'http://localhost:8000/api/v1/titles?imdb_score_min=8.5&genre=sci-fi',
+  'http://localhost:8000/api/v1/titles?imdb_score_min=8.5&genre=crime'
+];
 
-switchButtonsListeners();
-getMoviesData().then((data) => {
-  addDataToCarousel(category0, data);
-});
+const categories = [
+  document.querySelector('#category-0'),
+  document.querySelector('#category-1'),
+  document.querySelector('#category-2'),
+  document.querySelector('#category-3')
+];
 
-async function getMoviesData() {
-  let total = [];
-  let result = await axios.get(baseUrl);
-  result = result.data.results;
-  total.push(...result);
-  console.log(result);
-  return result;
-}
+const movies = [[], [], [], []];
 
-function addDataToCarousel(carrousel, data) {
-  data.map((cur, index) => {
-    carrousel.insertAdjacentHTML(
-      'beforeend',
-      `<img class="img-${index} slider-img" src="${cur.image_url}" />`
-    );
+for (let i = 0; i < 4; i++) {
+  getMoviesData(urls[i]).then((data) => {
+    data = data
+      .sort((a, b) => {
+        return a.imdb_score - b.imdb_score;
+      })
+      .reverse();
+
+    for (let movie of data) {
+      if (movies[i].length < 7) {
+        movies[i].push(movie);
+      } else break;
+    }
+    console.log(movies[i]);
+    addDataToCarousel(categories[i], movies[i]);
   });
 }
 
-// Get modal element
+async function getMoviesData(baseUrl) {
+  let total = [];
+  let res = null;
+  do {
+    res = await axios.get(baseUrl);
+    total.push(...res.data.results);
+    baseUrl = res.data.next;
+  } while (baseUrl != null);
+  return total;
+}
+
+// Event listeners
 const carouselBox = document.querySelector('.carousel-box');
 const closeBtn = document.querySelector('.closeBtn');
 
+switchButtonsListeners();
 carouselBox.addEventListener('click', openModal);
 closeBtn.addEventListener('click', closeModal);
 window.addEventListener('click', outsideClick);

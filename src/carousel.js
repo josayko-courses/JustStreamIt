@@ -2,7 +2,16 @@ const sliders = document.querySelector('.carousel-box');
 const switchLeft = document.querySelector('.switchLeft');
 const switchRight = document.querySelector('.switchRight');
 
-export default function switchButtonsListeners() {
+function addDataToCarousel(carrousel, data) {
+  data.map((cur, index) => {
+    carrousel.insertAdjacentHTML(
+      'beforeend',
+      `<img class="img-${index} slider-img" src="${cur.image_url}" />`
+    );
+  });
+}
+
+function switchButtonsListeners() {
   let scrollAmount = 0;
   let scrollPerClick = 250;
   switchLeft.addEventListener('click', () => {
@@ -25,3 +34,5 @@ export default function switchButtonsListeners() {
     }
   });
 }
+
+export { addDataToCarousel, switchButtonsListeners };
