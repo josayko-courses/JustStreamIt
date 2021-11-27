@@ -49,6 +49,18 @@ async function showMovieData() {
       `<img class="img-${index} slider-img" src="${cur.image_url}" />`
     );
   });
+  scrollPerClick = 250;
+}
 
-  scrollPerClick = 500;
+// Get modal element
+
+const modal = document.querySelector('#simpleModal');
+const carouselBox = document.querySelector('.carousel-box');
+const closeBtn = document.querySelector('.closeBtn');
+
+carouselBox.addEventListener('click', openModal);
+
+function openModal(e) {
+  modal.style.display = 'block';
+  console.log(e);
 }
