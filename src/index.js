@@ -1,4 +1,5 @@
 const axios = require('axios').default;
+import { openModal, outsideClick, closeModal } from './modal.js';
 
 const baseUrl = 'http://localhost:8000/api/v1/titles?page=1&year=2004';
 const baseUrl2 = 'http://localhost:8000/api/v1/titles?page=2&year=2004';
@@ -54,25 +55,9 @@ async function showMovieData() {
 
 // Get modal element
 
-const modal = document.querySelector('#simpleModal');
 const carouselBox = document.querySelector('.carousel-box');
 const closeBtn = document.querySelector('.closeBtn');
 
 carouselBox.addEventListener('click', openModal);
 closeBtn.addEventListener('click', closeModal);
 window.addEventListener('click', outsideClick);
-
-function openModal(e) {
-  modal.style.display = 'block';
-  console.log(e);
-}
-
-function closeModal(e) {
-  modal.style.display = 'none';
-}
-
-function outsideClick(e) {
-  if (e.target == modal) {
-    modal.style.display = 'none';
-  }
-}

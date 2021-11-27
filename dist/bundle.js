@@ -330,9 +330,21 @@ eval("\n\nvar bind = __webpack_require__(/*! ./helpers/bind */ \"./node_modules/
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("const axios = (__webpack_require__(/*! axios */ \"./node_modules/axios/index.js\")[\"default\"]);\n\nconst baseUrl = 'http://localhost:8000/api/v1/titles?page=1&year=2004';\nconst baseUrl2 = 'http://localhost:8000/api/v1/titles?page=2&year=2004';\n\nconst sliders = document.querySelector('.carousel-box');\nconst switchLeft = document.querySelector('.switchLeft');\nconst switchRight = document.querySelector('.switchRight');\n\nshowMovieData();\nswitchButtonsListeners();\n\nfunction switchButtonsListeners() {\n  let scrollAmount = 0;\n  let scrollPerClick = 250;\n  switchLeft.addEventListener('click', () => {\n    sliders.scrollTo({\n      top: 0,\n      left: (scrollAmount -= scrollPerClick),\n      behavior: 'smooth'\n    });\n    if (scrollAmount < 0) {\n      scrollAmount = 0;\n    }\n  });\n  switchRight.addEventListener('click', () => {\n    if (scrollAmount <= sliders.scrollWidth - sliders.clientWidth) {\n      sliders.scrollTo({\n        top: 0,\n        left: (scrollAmount += scrollPerClick),\n        behavior: 'smooth'\n      });\n    }\n  });\n}\n\nasync function showMovieData() {\n  let total = [];\n  let result = await axios.get(baseUrl);\n  let result2 = await axios.get(baseUrl2);\n  result = result.data.results;\n  result2 = result2.data.results;\n  total.push(...result);\n  total.push(...result2);\n  console.log(total);\n\n  total.map((cur, index) => {\n    sliders.insertAdjacentHTML(\n      'beforeend',\n      `<img class=\"img-${index} slider-img\" src=\"${cur.image_url}\" />`\n    );\n  });\n}\n\n// Get modal element\n\nconst modal = document.querySelector('#simpleModal');\nconst carouselBox = document.querySelector('.carousel-box');\nconst closeBtn = document.querySelector('.closeBtn');\n\ncarouselBox.addEventListener('click', openModal);\ncloseBtn.addEventListener('click', closeModal);\nwindow.addEventListener('click', outsideClick);\n\nfunction openModal(e) {\n  modal.style.display = 'block';\n  console.log(e);\n}\n\nfunction closeModal(e) {\n  modal.style.display = 'none';\n}\n\nfunction outsideClick(e) {\n  if (e.target == modal) {\n    modal.style.display = 'none';\n  }\n}\n\n\n//# sourceURL=webpack://juststreamit/./src/index.js?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modal_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modal.js */ \"./src/modal.js\");\nconst axios = (__webpack_require__(/*! axios */ \"./node_modules/axios/index.js\")[\"default\"]);\n\n\nconst baseUrl = 'http://localhost:8000/api/v1/titles?page=1&year=2004';\nconst baseUrl2 = 'http://localhost:8000/api/v1/titles?page=2&year=2004';\n\nconst sliders = document.querySelector('.carousel-box');\nconst switchLeft = document.querySelector('.switchLeft');\nconst switchRight = document.querySelector('.switchRight');\n\nshowMovieData();\nswitchButtonsListeners();\n\nfunction switchButtonsListeners() {\n  let scrollAmount = 0;\n  let scrollPerClick = 250;\n  switchLeft.addEventListener('click', () => {\n    sliders.scrollTo({\n      top: 0,\n      left: (scrollAmount -= scrollPerClick),\n      behavior: 'smooth'\n    });\n    if (scrollAmount < 0) {\n      scrollAmount = 0;\n    }\n  });\n  switchRight.addEventListener('click', () => {\n    if (scrollAmount <= sliders.scrollWidth - sliders.clientWidth) {\n      sliders.scrollTo({\n        top: 0,\n        left: (scrollAmount += scrollPerClick),\n        behavior: 'smooth'\n      });\n    }\n  });\n}\n\nasync function showMovieData() {\n  let total = [];\n  let result = await axios.get(baseUrl);\n  let result2 = await axios.get(baseUrl2);\n  result = result.data.results;\n  result2 = result2.data.results;\n  total.push(...result);\n  total.push(...result2);\n  console.log(total);\n\n  total.map((cur, index) => {\n    sliders.insertAdjacentHTML(\n      'beforeend',\n      `<img class=\"img-${index} slider-img\" src=\"${cur.image_url}\" />`\n    );\n  });\n}\n\n// Get modal element\n\nconst carouselBox = document.querySelector('.carousel-box');\nconst closeBtn = document.querySelector('.closeBtn');\n\ncarouselBox.addEventListener('click', _modal_js__WEBPACK_IMPORTED_MODULE_0__.openModal);\ncloseBtn.addEventListener('click', _modal_js__WEBPACK_IMPORTED_MODULE_0__.closeModal);\nwindow.addEventListener('click', _modal_js__WEBPACK_IMPORTED_MODULE_0__.outsideClick);\n\n\n//# sourceURL=webpack://juststreamit/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/modal.js":
+/*!**********************!*\
+  !*** ./src/modal.js ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"openModal\": () => (/* binding */ openModal),\n/* harmony export */   \"outsideClick\": () => (/* binding */ outsideClick),\n/* harmony export */   \"closeModal\": () => (/* binding */ closeModal)\n/* harmony export */ });\nconst modal = document.querySelector('#simpleModal');\n\nfunction openModal(e) {\n  modal.style.display = 'block';\n  console.log(e);\n}\n\nfunction closeModal(e) {\n  modal.style.display = 'none';\n}\n\nfunction outsideClick(e) {\n  if (e.target == modal) {\n    modal.style.display = 'none';\n  }\n}\n\n\n\n\n//# sourceURL=webpack://juststreamit/./src/modal.js?");
 
 /***/ })
 
@@ -361,6 +373,35 @@ eval("const axios = (__webpack_require__(/*! axios */ \"./node_modules/axios/ind
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
 /******/ 	
 /************************************************************************/
 /******/ 	
