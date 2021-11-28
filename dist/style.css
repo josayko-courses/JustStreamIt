@@ -30,6 +30,10 @@ header img {
   margin-top: 2%;
 }
 
+.carousel h2 {
+  color: #fff;
+}
+
 .carousel .switchLeft,
 .carousel .switchRight {
   color: white;

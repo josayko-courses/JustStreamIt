@@ -1,7 +1,3 @@
-const sliders = document.querySelector('.carousel-box');
-const switchLeft = document.querySelector('.switchLeft');
-const switchRight = document.querySelector('.switchRight');
-
 function addDataToCarousel(carrousel, data) {
   data.map((cur, index) => {
     carrousel.insertAdjacentHTML(
@@ -11,9 +7,10 @@ function addDataToCarousel(carrousel, data) {
   });
 }
 
-function switchButtonsListeners() {
+function switchButtonsListeners(sliders) {
   let scrollAmount = 0;
   let scrollPerClick = 250;
+  const switchLeft = sliders.nextElementSibling;
   switchLeft.addEventListener('click', () => {
     sliders.scrollTo({
       top: 0,
@@ -24,6 +21,7 @@ function switchButtonsListeners() {
       scrollAmount = 0;
     }
   });
+  const switchRight = sliders.nextElementSibling.nextElementSibling;
   switchRight.addEventListener('click', () => {
     if (scrollAmount <= sliders.scrollWidth - sliders.clientWidth) {
       sliders.scrollTo({

@@ -48,10 +48,17 @@ async function getMoviesData(baseUrl) {
 }
 
 // Event listeners
-const carouselBox = document.querySelector('.carousel-box');
+const carouselBox = document.querySelectorAll('.carousel-box');
 const closeBtn = document.querySelector('.closeBtn');
+const sliders = document.querySelectorAll('.carousel-box');
 
-switchButtonsListeners();
-carouselBox.addEventListener('click', openModal);
+sliders.forEach((el) => {
+  switchButtonsListeners(el);
+});
+
+carouselBox.forEach((el) => {
+  el.addEventListener('click', openModal);
+});
+
 closeBtn.addEventListener('click', closeModal);
 window.addEventListener('click', outsideClick);
