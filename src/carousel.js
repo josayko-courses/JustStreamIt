@@ -1,8 +1,8 @@
 function addDataToCarousel(carrousel, data) {
-  data.map((cur, index) => {
+  data.map((cur) => {
     carrousel.insertAdjacentHTML(
       'beforeend',
-      `<img class="img-${index} slider-img" src="${cur.image_url}" />`
+      `<img id="${cur.id}" class="slider-img" src="${cur.image_url}" />`
     );
   });
 }
