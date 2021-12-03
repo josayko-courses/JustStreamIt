@@ -19,7 +19,7 @@ const categories = [
 const movies = [[], [], [], []];
 
 for (let i = 0; i < 4; i++) {
-  getMoviesData(urls[i]).then((data) => {
+  getMoviesList(urls[i]).then((data) => {
     data = data
       .sort((a, b) => {
         return a.imdb_score - b.imdb_score;
@@ -36,7 +36,7 @@ for (let i = 0; i < 4; i++) {
   });
 }
 
-async function getMoviesData(baseUrl) {
+async function getMoviesList(baseUrl) {
   let total = [];
   let res = null;
   do {
