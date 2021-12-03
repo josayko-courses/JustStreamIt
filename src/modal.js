@@ -10,11 +10,11 @@ async function getMovieData(id) {
   return res.data;
 }
 
-function parseGenres(genres) {
+function parseArray(array) {
   let str = '';
-  genres.forEach((g, i) => {
+  array.forEach((g, i) => {
     str += g;
-    if (i != genres.length - 1) {
+    if (i != array.length - 1) {
       str += ', ';
     }
   });
@@ -33,7 +33,7 @@ function fillMovieBody(data) {
 
   // Infos
   const contents = {
-    Genre: parseGenres(data.genres),
+    Genre: parseArray(data.genres),
     Year: data.year,
     Description: data.description
   };
@@ -52,7 +52,26 @@ function fillMovieBody(data) {
   body.appendChild(div);
 }
 
-function fillMovieFooter(data) {}
+function fillMovieFooter(data) {
+  const contents = {
+    Director: parseArray(data.directors),
+    Actors: parseArray(data.actors),
+    Countries: parseArray(data.countries)
+  };
+
+  let div = document.createElement('div');
+  div.setAttribute('class', 'movie-info');
+
+  for (const key in contents) {
+    let el = document.createElement('h3');
+    el.innerHTML = key;
+    div.appendChild(el);
+    el = document.createElement('p');
+    el.innerHTML = contents[key];
+    div.appendChild(el);
+  }
+  footer.appendChild(div);
+}
 
 function openModal(e) {
   modal.style.display = 'block';
