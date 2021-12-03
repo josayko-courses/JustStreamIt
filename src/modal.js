@@ -35,7 +35,9 @@ function fillMovieBody(data) {
   const contents = {
     Genre: parseArray(data.genres),
     Year: data.year,
-    Description: data.description
+    Duration: data.duration + ' mn',
+    Description: data.description,
+    'Imdb score': data.imdb_score + ' / 10'
   };
 
   div = document.createElement('div');
@@ -56,8 +58,19 @@ function fillMovieFooter(data) {
   const contents = {
     Director: parseArray(data.directors),
     Actors: parseArray(data.actors),
-    Countries: parseArray(data.countries)
+    Countries: parseArray(data.countries),
+    Rated: data.rated
   };
+
+  const currency_val = data.budget_currency;
+  if (data.worldwide_gross_income != null && currency_val != null) {
+    contents['Box Office'] = new Intl.NumberFormat('de-DE', {
+      style: 'currency',
+      currency: currency_val
+    }).format(data.worldwide_gross_income);
+  } else {
+    contents['Box Office'] = 'N/A';
+  }
 
   let div = document.createElement('div');
   div.setAttribute('class', 'movie-info');
@@ -75,13 +88,6 @@ function fillMovieFooter(data) {
 
 function openModal(e) {
   modal.style.display = 'block';
-  // rated
-  // imdb score
-  // directors
-  // actors
-  // from imdb_url: duration
-  // from imdb_url: origin country
-  // from imdb_url: box office results
   getMovieData(e.target.id).then((data) => {
     let el = document.createElement('h2');
 
