@@ -1,10 +1,16 @@
-function addDataToCarousel(carrousel, data) {
+import { openModal } from './modal';
+
+function addImageToCarousel(carousel, data) {
   data.map((cur) => {
-    carrousel.insertAdjacentHTML(
+    carousel.insertAdjacentHTML(
       'beforeend',
       `<img id="${cur.id}" class="slider-img" src="${cur.image_url}" />`
     );
   });
+
+  for (let img of carousel.children) {
+    img.addEventListener('click', openModal);
+  }
 }
 
 function switchButtonsListeners(sliders) {
@@ -33,4 +39,4 @@ function switchButtonsListeners(sliders) {
   });
 }
 
-export { addDataToCarousel, switchButtonsListeners };
+export { addImageToCarousel, switchButtonsListeners };
