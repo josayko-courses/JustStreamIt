@@ -6,6 +6,7 @@
   "scripts": {
     "init_api": "cd api && pipenv install && pipenv run python manage.py create_db",
     "api": "cd api/ && pipenv run python manage.py runserver; echo \"local API endpoint: http://localhost:8000/api/v1/titles/\"",
+    "start": "npm run init_api && npm run api",
     "build": "webpack"
   },
   "keywords": [],

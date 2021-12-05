@@ -202,6 +202,13 @@ ul.nav li.current a {
   cursor: pointer;
 }
 
+footer {
+  padding: 20px;
+  font-size: 1em;
+  display: flex;
+  color: #f4f4f4;
+}
+
 @keyframes modalopen {
   from {
     opacity: 0;

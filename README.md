@@ -33,8 +33,7 @@
    $ npm install
 
    # Initialize and run API at http://localhost:8000/api/v1/titles/
-   $ npm run init_api
-   $ npm run api
+   $ npm start
    ```
 
-   - Open `index.html` in a web browser. That's it !
+   - Open `dist/index.html` in a web browser. That's it !
