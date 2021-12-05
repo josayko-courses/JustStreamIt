@@ -1,5 +1,5 @@
 const axios = require('axios').default;
-import { outsideClick, closeModal } from './modal.js';
+import { outsideClick, openModal, closeModal } from './modal.js';
 import {
   switchButtonsListeners,
   addDataToCarousel,
@@ -35,6 +35,11 @@ for (let i = 0; i < 4; i++) {
         movies[i].push(movie);
       } else break;
     }
+
+    // Add data to header
+    if (i == 0) {
+      getHeaderMovie(movies[0][3]);
+    }
     addImageToCarousel(categories[i], movies[i]);
   });
 }
@@ -49,6 +54,29 @@ async function getMoviesList(baseUrl) {
     baseUrl = res.data.next;
   } while (baseUrl != null);
   return total;
+}
+
+function getHeaderMovie(movie) {
+  axios.get('http://localhost:8000/api/v1/titles/' + movie.id).then((res) => {
+    const btn = document.querySelector('.button-60');
+    btn.setAttribute('id', movie.id);
+    btn.addEventListener('click', openModal);
+
+    const info = document.querySelector('.header-info');
+    let title = document.createElement('h1');
+    title.innerHTML = res.data.original_title;
+
+    info.insertAdjacentElement('afterbegin', title);
+
+    let description = document.createElement('p');
+    description.innerHTML = res.data.description;
+    info.insertAdjacentElement('beforeend', description);
+
+    const image = document.querySelector('.header-image');
+    let img = document.createElement('img');
+    img.setAttribute('src', res.data.image_url);
+    image.appendChild(img);
+  });
 }
 
 /* Event listeners */
