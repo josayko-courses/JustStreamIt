@@ -49,7 +49,7 @@ ul.nav li.current a {
   display: flex;
   color: #f4f4f4;
   width: 70%;
-  height: 30%;
+  height: auto;
   align-items: center;
 }
 
