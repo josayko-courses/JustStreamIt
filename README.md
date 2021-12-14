@@ -29,6 +29,8 @@
 3. Start the project
 
    ```bash
+   $ cd JustStreamIt/
+
    # Initialize required package (axios)
    $ npm install
 
